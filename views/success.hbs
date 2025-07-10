@@ -1,0 +1,14 @@
+<script>
+  // Show notification and redirect
+  document.addEventListener('DOMContentLoaded', function() {
+    const notification = document.getElementById('notification');
+    const messageEl = document.getElementById('notification-message');
+    
+    messageEl.textContent = '{{message}}';
+    notification.classList.add('show');
+    
+    setTimeout(() => {
+      window.location.href = '/';
+    }, 1000);
+  });
+</script>

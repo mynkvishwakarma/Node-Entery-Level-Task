@@ -1,0 +1,39 @@
+<h1>Add New User</h1>
+<form action="/users/add" method="POST" id="userForm">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required placeholder="Enter full name">
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required 
+           placeholder="user@example.com"
+           pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
+           title="Enter a valid email address">
+  </div>
+  
+  <div class="form-group">
+    <label for="mobile">Mobile:</label>
+    <input type="tel" id="mobile" name="mobile" required 
+           placeholder="1234567890"
+           pattern="[0-9]{10}" 
+           title="10-digit mobile number">
+  </div>
+  
+  <button type="submit">
+    <i class="fas fa-user-plus"></i> Create User
+  </button>
+</form>
+
+<script>
+  document.getElementById('userForm').addEventListener('submit', function(e) {
+    const button = this.querySelector('button[type="submit"]');
+    const originalHTML = button.innerHTML;
+    
+    button.innerHTML = '<i class="fas fa-spinner"></i> Creating...';
+    button.disabled = true;
+    
+    // Original form submission continues
+  });
+</script>
