@@ -15,7 +15,7 @@ router.get('/add', async (req, res) => {
 
 // Create Task
 router.post('/add', async (req, res) => {
-  const { userId, taskName, taskType, lastDate } = req.body; // Add lastDate
+  const { userId, taskName, taskType, lastDate } = req.body;
 
   try {
     const taskData = {

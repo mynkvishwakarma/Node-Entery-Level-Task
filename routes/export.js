@@ -34,7 +34,7 @@ router.get('/excel', async (req, res) => {
       { header: 'User Name', key: 'user_name', width: 30 },
       { header: 'Task Name', key: 'task_name', width: 30 },
       { header: 'Status', key: 'task_type', width: 15 },
-      { header: 'Last Date', key: 'last_date', width: 15 } // Add this
+      { header: 'Last Date', key: 'last_date', width: 15 }
     ];
 
     tasks.forEach(task => {
@@ -44,7 +44,7 @@ router.get('/excel', async (req, res) => {
         user_name: task.user ? task.user.name : 'N/A',
         task_name: task.task_name,
         task_type: task.task_type,
-        last_date: task.last_date || 'N/A' // Add this
+        last_date: task.last_date || 'N/A' 
       });
     });
 
