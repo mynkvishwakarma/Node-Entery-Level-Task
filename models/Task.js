@@ -38,4 +38,5 @@ class Task extends Model {
   }
 }
 
+//export module
 module.exports = Task;
