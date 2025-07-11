@@ -5,7 +5,7 @@
   <h1>Success!</h1>
   <p>{{message}}</p>
   <p>Redirecting to home in <span id="countdown">5</span> seconds...</p>
-  <a href="/" class="btn">
+  <a href="//users/add" class="btn">
     <i class="fas fa-home"></i> Return to Home Now
   </a>
 </div>
@@ -19,7 +19,7 @@
       countdownEl.textContent = seconds;
       if (seconds <= 0) {
         clearInterval(countdown);
-        window.location.href = '/';
+        window.location.href = '/users/add';
       }
     }, 1000);
   });

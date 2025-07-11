@@ -59,7 +59,7 @@ app.use('/export', exportRoutes);
 
 // Home route
 app.get('/', (req, res) => {
-  res.redirect('/');
+  res.redirect('/users/add');
 });
 
 const PORT = process.env.PORT || 3000;
