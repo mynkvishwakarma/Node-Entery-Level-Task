@@ -12,7 +12,6 @@ router.get('/add', (req, res) => {
 router.post('/add', async (req, res) => {
   const { name, email, mobile } = req.body;
 
-  // Server-side validation
   if (!validateEmail(email)) {
     return res.status(400).send('Invalid email format');
   }

@@ -29,14 +29,14 @@
                   {{task_type}}
                 </span>
               </td>
-              <td>
-                {{#if last_date}}
-                  {{formatDate last_date}}
-                {{else}}
-                  -
-                {{/if}}
-              </td>
-              <td>{{formatDate created_at}}</td>
+            <td>
+            {{#if last_date}}
+                {{formatDate last_date}}
+            {{else}}
+                -
+            {{/if}}
+            </td>
+            <td>{{formatDate created_at}}</td>
             </tr>
           {{/each}}
         </tbody>

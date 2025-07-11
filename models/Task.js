@@ -13,7 +13,10 @@ class Task extends Model {
         user_id: { type: 'integer' },
         task_name: { type: 'string' },
         task_type: { type: 'string', enum: ['Pending', 'Done'] },
-        last_date: { type: ['string', 'null'] }, // Add this
+        last_date: { 
+          type: ['string', 'null'], 
+          format: 'date' 
+        },
         created_at: { type: 'string' },
         updated_at: { type: 'string' }
       }

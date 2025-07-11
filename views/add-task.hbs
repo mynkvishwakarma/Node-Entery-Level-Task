@@ -18,15 +18,14 @@
   <div class="form-group">
     <label for="taskType">Task Status:</label>
     <select id="taskType" name="taskType" required>
-      <option value="Pending">Pending</option>
       <option value="Done">Done</option>
+      <option value="Pending">Pending</option>
     </select>
   </div>
   
-  <!-- NEW: Last date field (only shown for pending tasks) -->
   <div class="form-group" id="lastDateGroup" style="display: none;">
     <label for="lastDate">Last Date (for pending tasks):</label>
-    <input type="date" id="lastDate" name="lastDate">
+    <input type="date" id="lastDate" name="lastDate" min="{{formatDateForInput}}">
   </div>
   
   <button type="submit">
@@ -43,7 +42,6 @@
     button.disabled = true;
   });
   
-  // Show/hide last date field based on task type
   document.getElementById('taskType').addEventListener('change', function() {
     const lastDateGroup = document.getElementById('lastDateGroup');
     if (this.value === 'Pending') {

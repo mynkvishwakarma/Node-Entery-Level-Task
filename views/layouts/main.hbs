@@ -40,7 +40,7 @@
       animation: fadeIn 0.3s ease-out;
     }
     
-    /* Navigation */
+
     .nav {
       background: var(--primary);
       padding: 15px 20px;
@@ -67,8 +67,7 @@
     .nav a.active {
       background: rgba(255, 255, 255, 0.25);
     }
-    
-    /* Content */
+ 
     .content {
       padding: 25px;
     }
@@ -81,7 +80,6 @@
       border-bottom: 1px solid var(--light-gray);
     }
     
-    /* Forms */
     .form-group {
       margin-bottom: 15px;
     }
@@ -127,7 +125,6 @@
       background: var(--primary-dark);
     }
     
-    /* Notification */
     .notification {
       position: fixed;
       bottom: 20px;
@@ -150,8 +147,6 @@
       transform: translateY(0);
       opacity: 1;
     }
-    
-    /* Animations */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -165,8 +160,6 @@
     .fa-spinner {
       animation: spin 1s linear infinite;
     }
-    
-    /* Responsive */
     @media (max-width: 768px) {
       .nav {
         flex-direction: column;
@@ -208,7 +201,6 @@
   </div>
 
   <script>
-    // Set active nav link based on current page
     document.addEventListener('DOMContentLoaded', function() {
       const path = window.location.pathname;
       const links = document.querySelectorAll('.nav a');
@@ -220,13 +212,11 @@
         }
       });
 
-      // Show notification if coming from success page
       if (window.location.search.includes('success=true')) {
         const urlParams = new URLSearchParams(window.location.search);
         const message = urlParams.get('message') || 'Operation completed successfully';
         showNotification(message);
         
-        // Redirect after 5 seconds
         setTimeout(() => {
           window.location.href = '/';
         }, 5000);

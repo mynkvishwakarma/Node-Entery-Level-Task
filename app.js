@@ -15,19 +15,25 @@ Model.knex(db);
 const app = express();
 
 
-// Add Handlebars helpers for date formatting
+// Update the hbs creation block
 const hbs = exphbs.create({
   extname: '.hbs',
   defaultLayout: 'main',
   helpers: {
-    formatDate: function(date) {
-      if (!date) return '';
-      return new Date(date).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      });
+    formatDate: function(dateString) {
+      if (!dateString) return '';
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
     },
+    
+    formatDateForInput: function() {
+      const today = new Date();
+      return today.toISOString().split('T')[0];
+    },
+    
     eq: function(a, b) {
       return a === b;
     }
@@ -53,7 +59,7 @@ app.use('/export', exportRoutes);
 
 // Home route
 app.get('/', (req, res) => {
-  res.redirect('/tasks');
+  res.redirect('/');
 });
 
 const PORT = process.env.PORT || 3000;

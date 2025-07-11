@@ -19,14 +19,13 @@ router.post('/add', async (req, res) => {
 
   try {
     const taskData = {
-      user_id: userId,
+      user_id: parseInt(userId), 
       task_name: taskName,
       task_type: taskType
     };
     
-    // Add last_date only for pending tasks
     if (taskType === 'Pending' && lastDate) {
-      taskData.last_date = new Date(lastDate);
+      taskData.last_date = lastDate;
     }
 
     await Task.query().insert(taskData);
@@ -48,7 +47,6 @@ router.get('/user/:id', async (req, res) => {
   }
 });
 
-// NEW: Task List Page
 router.get('/', async (req, res) => {
   try {
     const tasks = await Task.query()
