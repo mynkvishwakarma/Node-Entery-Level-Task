@@ -5,6 +5,21 @@ class Task extends Model {
     return 'tasks';
   }
 
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      properties: {
+        id: { type: 'integer' },
+        user_id: { type: 'integer' },
+        task_name: { type: 'string' },
+        task_type: { type: 'string', enum: ['Pending', 'Done'] },
+        last_date: { type: ['string', 'null'] }, // Add this
+        created_at: { type: 'string' },
+        updated_at: { type: 'string' }
+      }
+    };
+  }
+
   static get relationMappings() {
     const User = require('./User');
     return {

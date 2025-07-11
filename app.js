@@ -14,12 +14,29 @@ Model.knex(db);
 
 const app = express();
 
-// Handlebars setup
-app.engine('hbs', exphbs.engine({
+
+// Add Handlebars helpers for date formatting
+const hbs = exphbs.create({
   extname: '.hbs',
-  defaultLayout: 'main'
-}));
+  defaultLayout: 'main',
+  helpers: {
+    formatDate: function(date) {
+      if (!date) return '';
+      return new Date(date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    },
+    eq: function(a, b) {
+      return a === b;
+    }
+  }
+});
+
+app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,7 +53,7 @@ app.use('/export', exportRoutes);
 
 // Home route
 app.get('/', (req, res) => {
-  res.redirect('/users/add');
+  res.redirect('/tasks');
 });
 
 const PORT = process.env.PORT || 3000;

@@ -1,0 +1,115 @@
+<div class="content">
+  <h1 class="page-title">Task List</h1>
+  
+  {{#if tasks.length}}
+    <div class="task-list">
+      <table>
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>Last Date</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each tasks}}
+            <tr class="{{#if (eq task_type 'Pending')}}pending{{else}}done{{/if}}">
+              <td>{{task_name}}</td>
+              <td>
+                {{#if user}}
+                  {{user.name}} ({{user.email}})
+                {{else}}
+                  User not found
+                {{/if}}
+              </td>
+              <td>
+                <span class="status-badge {{task_type}}">
+                  {{task_type}}
+                </span>
+              </td>
+              <td>
+                {{#if last_date}}
+                  {{formatDate last_date}}
+                {{else}}
+                  -
+                {{/if}}
+              </td>
+              <td>{{formatDate created_at}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{else}}
+    <div class="no-tasks">
+      <i class="fas fa-tasks"></i>
+      <p>No tasks found. Create your first task!</p>
+      <a href="/tasks/add" class="btn">
+        <i class="fas fa-plus"></i> Add Task
+      </a>
+    </div>
+  {{/if}}
+</div>
+
+<style>
+  .task-list {
+    overflow-x: auto;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+  
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+  }
+  
+  tr:hover {
+    background-color: #f5f7ff;
+  }
+  
+  .status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+  
+  .status-badge.Pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+  
+  .status-badge.Done {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .no-tasks {
+    text-align: center;
+    padding: 40px 20px;
+    border: 1px dashed #e9ecef;
+    border-radius: 8px;
+  }
+  
+  .no-tasks i {
+    font-size: 3rem;
+    color: #e9ecef;
+    margin-bottom: 15px;
+  }
+  
+  .no-tasks p {
+    margin-bottom: 20px;
+    color: #6c757d;
+  }
+</style> 

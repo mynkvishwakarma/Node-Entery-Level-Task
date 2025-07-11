@@ -15,14 +15,21 @@ router.get('/add', async (req, res) => {
 
 // Create Task
 router.post('/add', async (req, res) => {
-  const { userId, taskName, taskType } = req.body;
+  const { userId, taskName, taskType, lastDate } = req.body; // Add lastDate
 
   try {
-    await Task.query().insert({
+    const taskData = {
       user_id: userId,
       task_name: taskName,
       task_type: taskType
-    });
+    };
+    
+    // Add last_date only for pending tasks
+    if (taskType === 'Pending' && lastDate) {
+      taskData.last_date = new Date(lastDate);
+    }
+
+    await Task.query().insert(taskData);
     res.render('success', { message: 'Task created successfully!' });
   } catch (error) {
     res.status(500).send('Error creating task: ' + error.message);
@@ -38,6 +45,22 @@ router.get('/user/:id', async (req, res) => {
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+// NEW: Task List Page
+router.get('/', async (req, res) => {
+  try {
+    const tasks = await Task.query()
+      .withGraphFetched('user')
+      .orderBy('created_at', 'desc');
+    
+    res.render('tasks', { 
+      tasks,
+      active: { taskList: true } 
+    });
+  } catch (error) {
+    res.status(500).send('Error fetching tasks: ' + error.message);
   }
 });
 
